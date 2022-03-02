@@ -224,8 +224,8 @@ public class Ajouter extends JFrame {
                 addVehiculeButton(e);
             } catch (SQLException ex) {
                 ex.printStackTrace();
-            } catch (ParseException parseException) {
-                parseException.printStackTrace();
+            } catch (ParseException ex) {
+                ex.printStackTrace();
             }
         });
         contentPane.add(button1, "cell 0 18 3 1");

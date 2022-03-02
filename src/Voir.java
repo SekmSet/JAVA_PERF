@@ -12,10 +12,13 @@ import java.util.ArrayList;
  * @author Joly
  */
 public class Voir extends JFrame {
-    ArrayList<Voiture> listVoitures;
+    ArrayList<Voiture> listNeufs;
     ArrayList<Occasion> listOccasions;
+    Voiture neuf;
+    Occasion occasion;
     String type;
-    
+
+    private final String colorRed = "#CD1818";
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Joly
@@ -25,6 +28,7 @@ public class Voir extends JFrame {
     private JButton button3;
     private JScrollPane scrollPane1;
     private JList<String> list1;
+    private JLabel spanError;
     private JButton button4;
     private DefaultListModel listModel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
@@ -53,6 +57,7 @@ public class Voir extends JFrame {
         button3 = new JButton();
         scrollPane1 = new JScrollPane();
         list1 = new JList<>();
+        spanError = new JLabel();
         button4 = new JButton();
 
         //======== this ========
@@ -65,6 +70,7 @@ public class Voir extends JFrame {
             "[293,fill]" +
             "[218,fill]",
             // rows
+            "[]" +
             "[]" +
             "[]" +
             "[]" +
@@ -125,10 +131,14 @@ public class Voir extends JFrame {
         }
         contentPane.add(scrollPane1, "cell 2 4 2 1");
 
+        //---- spanError ----
+        spanError.setFont(spanError.getFont().deriveFont(spanError.getFont().getStyle() | Font.ITALIC, spanError.getFont().getSize() + 3f));
+        contentPane.add(spanError, "cell 2 5 2 1");
+
         //---- button4 ----
         button4.setText("Voir les d\u00e9tails");
         button4.addActionListener(e -> voirDetailsButton(e));
-        contentPane.add(button4, "cell 2 5 2 1");
+        contentPane.add(button4, "cell 2 6 2 1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -140,56 +150,102 @@ public class Voir extends JFrame {
     }
 
     private void voirDetailsButton(ActionEvent e) {
-        // TODO add your code here
+        int index = list1.getSelectedIndex();
+
+        if(index == -1) {
+            spanError.setText("Aucun élément sélectionner.");
+            spanError.setForeground(Color.decode(this.colorRed));
+            return;
+        }
+
+        Voiture v = new Voiture();
+        Occasion o = new Occasion();
+
+        var element = listModel.getElementAt(index);
+
+        switch(type) {
+            case "list all" :
+                occasion = o.getVoitureNeufOrOccasion(listOccasions, element.toString());
+
+                if (occasion == null) {
+                    neuf = v.getVoitureNeufOrOccasion(listNeufs, element.toString());
+                }
+
+                break;
+            case "list occasion" :
+                occasion = o.getVoitureOccasion(listOccasions, element.toString());
+                break;
+            case "list neuf" :
+                neuf = v.getVoitureNeuf(listNeufs, element.toString());
+                break;
+        }
+
+        listModel = new DefaultListModel();
+
+        if(neuf != null) {
+            listModel.addElement(neuf);
+        }
+
+        if(occasion != null) {
+            listModel.addElement(occasion);
+        }
+
+        list1.setModel(listModel);
     }
 
     private void voirVoitureNeuve(ActionEvent e) throws SQLException {
         Voiture voitures = new Voiture();
-        listVoitures = voitures.getVoituresNeufs();
+        listNeufs = voitures.getVoituresNeufs();
 
-        if(listVoitures != null) {
+        if(listNeufs != null) {
             listModel = new DefaultListModel();
 
-            for(Voiture v : listVoitures) {
-                listModel.addElement(v);
+            for(Voiture v : listNeufs) {
+                listModel.addElement(v.getImmatriculation());
             }
 
             list1.setModel(listModel);
+
+            type = "list neuf";
         }
     }
 
     private void voirVoitureOccasion(ActionEvent e) throws SQLException {
         Occasion occasions = new Occasion();
-        listOccasions = occasions.getOccasion();
+        listOccasions = occasions.getVoituresOccasions();
 
         if(listOccasions != null) {
             listModel = new DefaultListModel();
 
             for(Occasion o : listOccasions) {
-                listModel.addElement(o);
+                listModel.addElement(o.getImmatriculation());
             }
 
             list1.setModel(listModel);
+            type = "list occasion";
+
         }
     }
 
     private void getAll () throws SQLException {
         Voiture voitures = new Voiture();
         Occasion occasions = new Occasion();
-        listVoitures = voitures.getVoituresNeufs();
-        listOccasions = occasions.getOccasion();
+        listNeufs = voitures.getVoituresNeufs();
+        listOccasions = occasions.getVoituresOccasions();
         listModel = new DefaultListModel();
 
-        if(listVoitures != null && listOccasions != null) {
-            for(Voiture v : listVoitures) {
-                listModel.addElement(v);
+        if(listNeufs != null && listOccasions != null) {
+
+            for(Voiture v : listNeufs) {
+                listModel.addElement(v.getImmatriculation());
             }
             list1.setModel(listModel);
 
             for(Occasion o : listOccasions) {
-                listModel.addElement(o);
+                listModel.addElement(o.getImmatriculation());
             }
             list1.setModel(listModel);
+            type = "list all";
         }
     }
 }

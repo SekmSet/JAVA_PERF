@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -124,12 +125,30 @@ public class Occasion extends Database {
                 '}';
     }
 
-    public ArrayList<Occasion> getOccasion() throws SQLException {
+    public ArrayList<Occasion> getVoituresOccasions() throws SQLException {
         Connection dbCon = this.databaseConnexion();
 
         if(dbCon != null) {
             this.getListVehiculesOccasion(dbCon);
             return occasions;
+        }
+        return null;
+    }
+
+    public Occasion getVoitureOccasion(ArrayList<Occasion> listOccasions, String element) {
+        for (Occasion o : listOccasions) {
+            if (o.getImmatriculation().equals(element)) {
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public Occasion getVoitureNeufOrOccasion(ArrayList<Occasion> list, String immatriculation) {
+        for (Occasion occasion : list) {
+            if (occasion.getImmatriculation().equals(immatriculation)) {
+                return occasion;
+            }
         }
         return null;
     }

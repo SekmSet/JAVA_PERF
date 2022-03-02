@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[fill][fill][293,fill][218,fill]"
-			"$rowConstraints": "[][][][][][]"
+			"$rowConstraints": "[][][][][][][]"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -52,12 +52,18 @@ new FormModel {
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 4 2 1"
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "spanError"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 2, 3, false )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 5 2 1"
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button4"
 				"text": "Voir les détails"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "voirDetailsButton", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 5 2 1"
+				"value": "cell 2 6 2 1"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

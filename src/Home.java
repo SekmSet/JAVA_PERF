@@ -29,14 +29,11 @@ public class Home extends JFrame {
     }
 
     private void addVehiculeButton(ActionEvent e) {
-        // TODO add your code here
         Ajouter a = new Ajouter();
         a.setVisible(true);
     }
 
-
     private void listVehiculesButton(ActionEvent e) throws SQLException {
-        // TODO add your code here
         Voir l = new Voir();
         l.setVisible(true);
     }

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -100,9 +101,28 @@ public class Voiture extends Database {
         return null;
     }
 
+    public Voiture getVoitureNeufOrOccasion(ArrayList<Voiture> list, String immatriculation) {
+        for (Voiture neuf : list) {
+            if (neuf.getImmatriculation().equals(immatriculation)) {
+                return neuf;
+            }
+        }
+        return null;
+    }
+
+    public Voiture getVoitureNeuf(ArrayList<Voiture> listNeufs, String element) {
+        for (Voiture neuf : listNeufs) {
+            if (neuf.getImmatriculation().equals(element)) {
+                return neuf;
+            }
+        }
+        return null;
+    }
+
     public void createVoiture (Voiture voiture) throws SQLException {
         Connection dbCon = this.databaseConnexion();
 
         this.createVehicule(dbCon, voiture);
     }
+
 }
