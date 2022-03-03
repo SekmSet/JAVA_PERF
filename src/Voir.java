@@ -1,3 +1,4 @@
+import java.awt.event.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -5,6 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 /*
  * Created by JFormDesigner on Tue Mar 01 09:19:55 CET 2022
  */
@@ -14,9 +18,12 @@ import java.util.ArrayList;
 public class Voir extends JFrame {
     ArrayList<Voiture> listNeufs;
     ArrayList<Occasion> listOccasions;
-    Voiture neuf;
-    Occasion occasion;
+    Voiture neuf = null;
+    Occasion occasion = null;
     String type;
+    String currentImmatriculation;
+    ArrayList<String> listImatriculation;
+    int index = 0;
 
     private final String colorRed = "#CD1818";
 
@@ -46,6 +53,121 @@ public class Voir extends JFrame {
 
     public Voir() throws SQLException {
         initComponents();
+    }
+
+    private void list1KeyPressed(KeyEvent e) {
+
+        occasion = null;
+        neuf = null;
+
+        int keyCode = e.getKeyCode();
+//        int index = -1;
+
+        Voiture v = new Voiture();
+        Occasion o = new Occasion();
+
+        var listWithNeufAndOccasions = new ArrayList<>();
+        listWithNeufAndOccasions.addAll(listNeufs);
+        listWithNeufAndOccasions.addAll(listOccasions);
+
+
+        if (keyCode == KeyEvent.VK_RIGHT) {
+            System.out.println("Fleche de droite");
+
+            if (type.equals("list occasion")) {
+                System.out.println("oc");
+
+                index += 1;
+                if (listOccasions.size() == index) {
+                    index = 0;
+                }
+
+                occasion = listOccasions.get(index);
+                currentImmatriculation = neuf.getImmatriculation();
+            } else if (type.equals("list neuf")) {
+                System.out.println("ne");
+
+                index += 1;
+                if (listNeufs.size() == index) {
+                    index = 0;
+                }
+
+                neuf = listNeufs.get(index);
+                currentImmatriculation = neuf.getImmatriculation();
+            }  else if (type.equals("list all")) {
+                System.out.println("ne");
+                index += 1;
+                if (listWithNeufAndOccasions.size() == index) {
+                    index = 0;
+                }
+
+                var neufOfOccasions = listWithNeufAndOccasions.get(index);
+                if (neufOfOccasions.getClass() == Voiture.class) {
+                    neuf = (Voiture)neufOfOccasions;
+                    currentImmatriculation = neuf.getImmatriculation();
+                }
+                if (neufOfOccasions.getClass() == Occasion.class) {
+                    occasion = (Occasion)neufOfOccasions;
+                    currentImmatriculation = occasion.getImmatriculation();
+                }
+            }
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            System.out.println("Fleche de gauche");
+
+            if (type.equals("list occasion")) {
+                System.out.println("oc");
+
+                index -= 1;
+                if (index == 0) {
+                    index = listOccasions.size() -1;
+                }
+
+                occasion = listOccasions.get(index);
+                currentImmatriculation = neuf.getImmatriculation();
+            } else if (type.equals("list neuf")) {
+                System.out.println("ne");
+
+                index -= 1;
+                if (index < 0) {
+                    index = listNeufs.size() -1;
+                }
+
+                neuf = listNeufs.get(index);
+                currentImmatriculation = neuf.getImmatriculation();
+            } else if (type.equals("list all")) {
+                System.out.println("ne");
+
+                index -= 1;
+                if (index < 0) {
+                    index = listWithNeufAndOccasions.size() -1;
+                }
+
+                var neufOfOccasions = listWithNeufAndOccasions.get(index);
+                if (neufOfOccasions.getClass() == Voiture.class) {
+                    neuf = (Voiture)neufOfOccasions;
+                    currentImmatriculation = neuf.getImmatriculation();
+                }
+                if (neufOfOccasions.getClass() == Occasion.class) {
+                    occasion = (Occasion)neufOfOccasions;
+                    currentImmatriculation = occasion.getImmatriculation();
+                }
+            }
+
+        } else {
+            System.out.println("Non reconnu");
+        }
+
+        listModel = new DefaultListModel();
+
+        if(neuf != null) {
+            listModel.addElement(neuf);
+        }
+
+        if(occasion != null) {
+            listModel.addElement(occasion);
+        }
+
+        list1.setModel(listModel);
     }
 
     private void initComponents() throws SQLException {
@@ -127,6 +249,12 @@ public class Voir extends JFrame {
                 public String getElementAt(int i) { return values[i]; }
             });
             list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            list1.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    list1KeyPressed(e);
+                }
+            });
             scrollPane1.setViewportView(list1);
         }
         contentPane.add(scrollPane1, "cell 2 4 2 1");
@@ -150,7 +278,7 @@ public class Voir extends JFrame {
     }
 
     private void voirDetailsButton(ActionEvent e) {
-        int index = list1.getSelectedIndex();
+        index = list1.getSelectedIndex();
 
         if(index == -1) {
             spanError.setText("Aucun élément sélectionner.");
@@ -166,17 +294,22 @@ public class Voir extends JFrame {
         switch(type) {
             case "list all" :
                 occasion = o.getVoitureNeufOrOccasion(listOccasions, element.toString());
+                neuf = v.getVoitureNeufOrOccasion(listNeufs, element.toString());
 
-                if (occasion == null) {
-                    neuf = v.getVoitureNeufOrOccasion(listNeufs, element.toString());
+                if (occasion != null) {
+                    currentImmatriculation = occasion.getImmatriculation();
+                } else if (neuf != null) {
+                    currentImmatriculation = neuf.getImmatriculation();
                 }
 
                 break;
             case "list occasion" :
                 occasion = o.getVoitureOccasion(listOccasions, element.toString());
+                currentImmatriculation = occasion.getImmatriculation();
                 break;
             case "list neuf" :
                 neuf = v.getVoitureNeuf(listNeufs, element.toString());
+                currentImmatriculation = neuf.getImmatriculation();
                 break;
         }
 
@@ -223,7 +356,6 @@ public class Voir extends JFrame {
 
             list1.setModel(listModel);
             type = "list occasion";
-
         }
     }
 

@@ -140,8 +140,9 @@ public class Database {
             stmt.setInt(4, occasion.getKilometrage());
             stmt.setFloat(5, occasion.getPrix());
             stmt.setInt(6, occasion.getDureeDeVie());
-            stmt.setDate(7, (Date) occasion.getDatePremierAchat());
-            stmt.setDate(8, (Date) occasion.getDataRevente());
+
+            stmt.setDate(7, new java.sql.Date(occasion.getDatePremierAchat().getTime()));
+            stmt.setDate(8, new java.sql.Date(occasion.getDataRevente().getTime()));
 
             int i = stmt.executeUpdate();
             isCreate(i);

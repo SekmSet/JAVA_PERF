@@ -9,6 +9,7 @@ new FormModel {
 			"$rowConstraints": "[][][][][][][]"
 		} ) {
 			name: "this"
+			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "GARAGE VAULVAU"
@@ -48,6 +49,7 @@ new FormModel {
 						addElement( "§" )
 					}
 					"selectionMode": 0
+					addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "list1KeyPressed", true ) )
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 4 2 1"
