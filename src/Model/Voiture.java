@@ -1,4 +1,5 @@
-import javax.swing.*;
+package Model;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -74,16 +75,16 @@ public class Voiture extends Database {
     }
 
     public void afficherDonnees (Voiture voiture) {
-        System.out.println("Voiture matriculation : " + voiture.getImmatriculation());
-        System.out.println("Voiture marque : " + voiture.getMarque());
-        System.out.println("Voiture modèle : " + voiture.getModele());
-        System.out.println("Voiture kilométrage : " + voiture.getKilometrage() + " KM");
-        System.out.println("Voiture prix de vente : " + voiture.getPrix() + " €");
+        System.out.println("Model.Voiture matriculation : " + voiture.getImmatriculation());
+        System.out.println("Model.Voiture marque : " + voiture.getMarque());
+        System.out.println("Model.Voiture modèle : " + voiture.getModele());
+        System.out.println("Model.Voiture kilométrage : " + voiture.getKilometrage() + " KM");
+        System.out.println("Model.Voiture prix de vente : " + voiture.getPrix() + " €");
     }
 
     @Override
     public String toString() {
-        return "Voiture{" +
+        return "Model.Voiture{" +
                 "marque='" + marque + '\'' +
                 ", modele='" + modele + '\'' +
                 ", kilometrage=" + kilometrage +

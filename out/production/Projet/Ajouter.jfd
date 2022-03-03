@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[184,fill][264,fill][fill]"
+			"$columnConstraints": "[184,fill][264,fill][145,fill]"
 			"$rowConstraints": "[][][][][][][][][][][][][][][][][][][108]"
 		} ) {
 			name: "this"
@@ -36,6 +36,12 @@ new FormModel {
 				name: "textField8"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": "ABC-DEF00"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 1"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "span16"
@@ -145,6 +151,12 @@ new FormModel {
 				"value": "cell 1 13"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label10"
+				"text": "JJ/MM/YYYY"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 13"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "span14"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 2, 1, false )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -163,6 +175,12 @@ new FormModel {
 				"value": "cell 1 15"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": "JJ/MM/YYYY"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 15"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "span15"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 2, 1, false )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -177,7 +195,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 480, 730 )
+			"size": new java.awt.Dimension( 630, 730 )
 		} )
 	}
 }

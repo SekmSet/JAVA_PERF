@@ -31,15 +31,13 @@ public class Home extends JFrame {
     private void addVehiculeButton(ActionEvent e) {
         Ajouter a = new Ajouter();
         a.setVisible(true);
+        this.setVisible(false);
     }
 
     private void listVehiculesButton(ActionEvent e) throws SQLException {
         Voir l = new Voir();
         l.setVisible(true);
-    }
-
-    private void button1(ActionEvent e) {
-        // TODO add your code here
+        this.setVisible(false);
     }
 
     private void initComponents() {
@@ -75,7 +73,6 @@ public class Home extends JFrame {
         //---- button1 ----
         button1.setText("AJOUTER UN VEHICULE");
         button1.addActionListener(e -> {
-			button1(e);
 			addVehiculeButton(e);
 		});
         contentPane.add(button1, "cell 0 2 3 1");

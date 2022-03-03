@@ -1,3 +1,5 @@
+import Model.Occasion;
+import Model.Voiture;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -21,6 +23,7 @@ import static java.lang.Integer.parseInt;
 public class Ajouter extends JFrame {
 
     private final String colorRed = "#CD1818";
+    public static Home home;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Joly
@@ -28,6 +31,7 @@ public class Ajouter extends JFrame {
     private JButton button2;
     private JLabel label9;
     private JTextField textField8;
+    private JLabel label12;
     private JLabel span16;
     private JLabel label2;
     private JTextField textField1;
@@ -46,9 +50,11 @@ public class Ajouter extends JFrame {
     private JLabel span13;
     private JLabel label7;
     private JTextField textField6;
+    private JLabel label10;
     private JLabel span14;
     private JLabel label8;
     private JTextField textField7;
+    private JLabel label11;
     private JLabel span15;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
@@ -75,6 +81,7 @@ public class Ajouter extends JFrame {
         button2 = new JButton();
         label9 = new JLabel();
         textField8 = new JTextField();
+        label12 = new JLabel();
         span16 = new JLabel();
         label2 = new JLabel();
         textField1 = new JTextField();
@@ -93,9 +100,11 @@ public class Ajouter extends JFrame {
         span13 = new JLabel();
         label7 = new JLabel();
         textField6 = new JTextField();
+        label10 = new JLabel();
         span14 = new JLabel();
         label8 = new JLabel();
         textField7 = new JTextField();
+        label11 = new JLabel();
         span15 = new JLabel();
         button1 = new JButton();
 
@@ -106,7 +115,7 @@ public class Ajouter extends JFrame {
             // columns
             "[184,fill]" +
             "[264,fill]" +
-            "[fill]",
+            "[145,fill]",
             // rows
             "[]" +
             "[]" +
@@ -145,6 +154,10 @@ public class Ajouter extends JFrame {
         label9.setFont(label9.getFont().deriveFont(label9.getFont().getStyle() | Font.BOLD, label9.getFont().getSize() + 3f));
         contentPane.add(label9, "cell 0 1");
         contentPane.add(textField8, "cell 1 1");
+
+        //---- label12 ----
+        label12.setText("ABC-DEF00");
+        contentPane.add(label12, "cell 2 1");
         contentPane.add(span16, "cell 0 2 2 1");
 
         //---- label2 ----
@@ -203,6 +216,10 @@ public class Ajouter extends JFrame {
         contentPane.add(label7, "cell 0 13");
         contentPane.add(textField6, "cell 1 13");
 
+        //---- label10 ----
+        label10.setText("JJ/MM/YYYY");
+        contentPane.add(label10, "cell 2 13");
+
         //---- span14 ----
         span14.setFont(span14.getFont().deriveFont(span14.getFont().getStyle() | Font.ITALIC, span14.getFont().getSize() + 1f));
         contentPane.add(span14, "cell 0 14 3 1");
@@ -212,6 +229,10 @@ public class Ajouter extends JFrame {
         label8.setFont(label8.getFont().deriveFont(label8.getFont().getStyle() | Font.BOLD, label8.getFont().getSize() + 3f));
         contentPane.add(label8, "cell 0 15");
         contentPane.add(textField7, "cell 1 15");
+
+        //---- label11 ----
+        label11.setText("JJ/MM/YYYY");
+        contentPane.add(label11, "cell 2 15");
 
         //---- span15 ----
         span15.setFont(span15.getFont().deriveFont(span15.getFont().getStyle() | Font.ITALIC, span15.getFont().getSize() + 1f));
@@ -235,23 +256,21 @@ public class Ajouter extends JFrame {
     }
 
     private void quitterAddButton(ActionEvent e) {
-        // TODO add your code here
+        home = new Home();
+        home.setVisible(true);
+        this.setVisible(false);
     }
 
     private boolean addVehiculeButton(ActionEvent e) throws SQLException, ParseException {
-        // string
         String immatriculation = textField8.getText();
         String marque = textField1.getText();
         String modele = textField2.getText();
 
-        // convert to int
         String kilometrage = textField3.getText();
         String dureeDeVie = textField5.getText();
 
-        // convert to decimal
         String prix = textField4.getText();
 
-        // convert to date
         String datePremierAchat = textField6.getText();
         String dateRevente = textField6.getText();
 

@@ -1,4 +1,5 @@
-import javax.swing.*;
+package Model;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -103,17 +104,17 @@ public class Occasion extends Database {
     }
 
     public void afficherDonnees (Occasion occasion) {
-        System.out.println("Voiture occasion matriculation : " + occasion.getImmatriculation());
-        System.out.println("Voiture occasion marque : " + occasion.getMarque());
-        System.out.println("Voiture occasion modèle : " + occasion.getModele());
-        System.out.println("Voiture occasion kilométrage : " + occasion.getKilometrage() + " KM");
-        System.out.println("Voiture occasion durée de vie : " + occasion.getDureeDeVie());
-        System.out.println("Voiture occasion prix de vente : " + occasion.getPrix() + " €");
+        System.out.println("Model.Voiture occasion matriculation : " + occasion.getImmatriculation());
+        System.out.println("Model.Voiture occasion marque : " + occasion.getMarque());
+        System.out.println("Model.Voiture occasion modèle : " + occasion.getModele());
+        System.out.println("Model.Voiture occasion kilométrage : " + occasion.getKilometrage() + " KM");
+        System.out.println("Model.Voiture occasion durée de vie : " + occasion.getDureeDeVie());
+        System.out.println("Model.Voiture occasion prix de vente : " + occasion.getPrix() + " €");
     }
 
     @Override
     public String toString() {
-        return "Occasion{" +
+        return "Model.Occasion{" +
                 "immatriculation='" + immatriculation + '\'' +
                 ", marque='" + marque + '\'' +
                 ", modele='" + modele + '\'' +

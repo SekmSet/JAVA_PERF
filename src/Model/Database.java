@@ -1,3 +1,5 @@
+package Model;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -56,7 +58,7 @@ public class Database {
             int kilometrage = rs.getInt("kilometrage");
             float prix = rs.getFloat("prix");
 
-            Voiture v = new Voiture (
+            Voiture v = new Voiture(
                     immatriculation,
                     modele,
                     marque,
