@@ -1,0 +1,43 @@
+JFDML JFormDesigner: "7.0.5.1.409" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][582,fill]"
+			"$rowConstraints": "[][][][]"
+		} ) {
+			name: "this"
+			"background": new java.awt.Color( 0, 0, 153, 255 )
+			"foreground": sfield java.awt.SystemColor textHighlight
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "GARAGE VAULVAU"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+				"horizontalAlignment": 0
+				"foreground": new java.awt.Color( 0, 0, 153, 255 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0 3 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "AJOUTER UN VEHICULE"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addVehiculeButton", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 2 3 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "VOIR TOUS LES VEHICULES"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "listVehiculesButton", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 3 3 1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 10 )
+			"size": new java.awt.Dimension( 690, 225 )
+		} )
+	}
+}
